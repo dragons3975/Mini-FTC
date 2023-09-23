@@ -1,0 +1,11 @@
+.gradle
+.idea
+build
+out
+*.iml
+bin
+
+/.vscode/settings.json
+venv
+**/__pycache__/
+**.egg-info

@@ -1,0 +1,62 @@
+//Gradle file library ev3dev-lang-java // Template project
+
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'idea'
+    id 'org.hidetake.ssh' version '2.10.1'
+    id "net.ossindex.audit" version "0.4.5-beta"
+    id "com.github.johnrengelman.shadow" version "4.0.3"
+}
+
+version = '1.0.0'
+
+// Project definitions
+
+repositories {
+    maven { url "https://jitpack.io" }
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.slf4j:slf4j-simple:2.0.9")
+    implementation("org.projectlombok:lombok:1.18.28")
+    annotationProcessor("org.projectlombok:lombok:1.18.28")
+    implementation("com.github.ev3dev-lang-java:lejos-commons:0.7.3")
+    implementation("net.java.dev.jna:jna:4.5.2")
+
+    //Requis par wpi (geometry)
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.15.2"
+    implementation "com.fasterxml.jackson.core:jackson-core:2.15.2"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.15.2"
+
+    //Serial
+    implementation "com.fazecast:jSerialComm:[2.0.0,3.0.0)"
+    
+    implementation files('libs/DragonsWPILib-1.0.0.jar')
+}
+
+compileJava.options.encoding = 'UTF-8'
+
+//Compile
+compileJava {
+    sourceCompatibility = 11
+    targetCompatibility = 11
+}
+
+//Jar
+jar {
+    baseName = "${rootProject.name}"
+    manifest {
+        from file("${projectDir}/src/main/resources/META-INF/MANIFEST.MF")
+    }
+}
+
+task fatJar {
+    doLast {
+    }
+}
+fatJar.dependsOn shadowJar
+
+apply from: './config.gradle'
+apply from: './gradle/deploy.gradle'
