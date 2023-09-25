@@ -18,6 +18,7 @@ task deploy {
             session(remotes.ev3dev) {
                 put from: "${projectDir}/build/libs/" + "${rootProject.name}" + "-" + version + "-all.jar", into: "/home/robot/"
                 put from: "${projectDir}/scripts/01_Start.sh", into: "/home/robot/"
+                execute "sed -i 's/\r//g' /home/robot/01_Start.sh"
                 execute "chmod +x /home/robot/01_Start.sh"
             }
         }
