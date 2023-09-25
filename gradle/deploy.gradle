@@ -23,7 +23,7 @@ task deploy {
         }
     }
 }
-deploy.dependsOn clean, fatJar
+deploy.dependsOn clean, shadowJar
 
 task remoteRun {
     doLast {
@@ -34,7 +34,6 @@ task remoteRun {
         }
     }
 }
-remoteRun.dependsOn pkillJava
 
 task deployAndRun {
     doLast {

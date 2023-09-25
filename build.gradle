@@ -51,11 +51,9 @@ jar {
     }
 }
 
-task fatJar {
-    doLast {
-    }
+shadowJar {
+  minimize()
 }
-fatJar.dependsOn shadowJar
 
 apply from: './config.gradle'
 apply from: './gradle/deploy.gradle'
