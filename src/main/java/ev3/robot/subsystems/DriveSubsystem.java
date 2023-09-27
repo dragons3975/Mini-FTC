@@ -35,4 +35,8 @@ public class DriveSubsystem extends Subsystem {
         m_zRotation = 0;
     }
 
+    public double distanceParcourueCm() {
+        return m_leftMotor.getTachoCount() * Math.PI * 12.5 / 360;
+    }
+
 }

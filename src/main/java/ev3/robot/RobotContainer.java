@@ -20,19 +20,16 @@ public class RobotContainer {
     private final TestBrasCommand mTestBrasCommand = new TestBrasCommand(mBrasSubsystem);
     private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
 
-    private final AutonomousCommandGroup mAutonomousCommandGroup;
+    private final AutonomousCommandGroup mAutonomousCommandGroup = new AutonomousCommandGroup(mDriveSubsystem);
 
     public RobotContainer() {
-
-        mAutonomousCommandGroup = new AutonomousCommandGroup(mDriveSubsystem);
-
         configureButtonBindings();
         configureDefaultCommands();
     }
 
     private void configureButtonBindings() {
         JoystickButton buttonA = new JoystickButton(mXboxController, Button.kA.value);
-        buttonA.whileTrue(mTestBrasCommand);
+        buttonA.onTrue(mTestBrasCommand);
     }
 
     private void configureDefaultCommands() {

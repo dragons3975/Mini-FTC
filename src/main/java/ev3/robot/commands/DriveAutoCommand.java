@@ -9,13 +9,14 @@ public class DriveAutoCommand extends Command {
 
     private int mXSpeed;
     private int mZRotation;
+    private double mDistance;
 
-    public DriveAutoCommand(DriveSubsystem driveSubsystem, int x, int z) {
+    public DriveAutoCommand(DriveSubsystem driveSubsystem, int x, int z, double distance) {
         mDriveSubsystem = driveSubsystem;
 
         mXSpeed = x;
         mZRotation = z;
-
+        mDistance = distance;
         addRequirements(driveSubsystem);
     }
 
@@ -39,8 +40,6 @@ public class DriveAutoCommand extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        // Commande infinie car la commande sera appellée avec un withTimeout()
-        // donc elle sera interrompue à la fin du timeout
-        return false;
+        return mDriveSubsystem.distanceParcourueCm() > mDistance;
     }
 }
