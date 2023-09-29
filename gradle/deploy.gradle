@@ -14,10 +14,12 @@ task pkillJava {
 
 task deploy {
     doLast {
+        file("${projectDir}/build/libs/version.txt").text = new Date().format('yyyyMMddHHmmss')
         ssh.run {
             session(remotes.ev3dev) {
                 put from: "${projectDir}/build/libs/" + "${rootProject.name}" + "-" + version + "-all.jar", into: "/home/robot/"
                 put from: "${projectDir}/scripts/01_Start.sh", into: "/home/robot/"
+                put from: "${projectDir}/build/libs/version.txt", into: "/home/robot/"
                 execute "sed -i 's/\r//g' /home/robot/01_Start.sh"
                 execute "chmod +x /home/robot/01_Start.sh"
             }
