@@ -17,7 +17,8 @@ public class RobotContainer {
 
     private final DriveSubsystem mDriveSubsystem = new DriveSubsystem();
     private final BrasSubsystem mBrasSubsystem = new BrasSubsystem();
-    private final BrasCommand mBrasCommand = new BrasCommand(mBrasSubsystem);
+    private final BrasCommand mBrasCommandOuvre = new BrasCommand(mBrasSubsystem, true);
+    private final BrasCommand mBrasCommandFerme = new BrasCommand(mBrasSubsystem, false);
     private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
 
     private final AutonomousCommandGroup mAutonomousCommandGroup;
@@ -32,7 +33,9 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         JoystickButton buttonX = new JoystickButton(mXboxController, Button.kX.value);
-        buttonX.whileTrue(mBrasCommand);
+        buttonX.whileTrue(mBrasCommandOuvre);
+        JoystickButton buttonY = new JoystickButton(mXboxController, Button.kY.value);
+        buttonY.whileTrue(mBrasCommandFerme);
     }
 
     private void configureDefaultCommands() {

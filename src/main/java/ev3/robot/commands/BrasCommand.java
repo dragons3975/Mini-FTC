@@ -5,10 +5,13 @@ import ev3.robot.subsystems.BrasSubsystem;
 
 public class BrasCommand extends Command {
 
+    private Boolean mOuvre;
+
     private final BrasSubsystem mBrasSubsystem;
 
-    public BrasCommand(BrasSubsystem brasSubsystem) {
+    public BrasCommand(BrasSubsystem brasSubsystem, boolean ouvre) {
         mBrasSubsystem = brasSubsystem;
+        mOuvre = ouvre;
 
         addRequirements(brasSubsystem);
     }
@@ -21,7 +24,11 @@ public class BrasCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        mBrasSubsystem.ouvre();
+        if (mOuvre) {
+            mBrasSubsystem.ouvre();
+        } else {
+            mBrasSubsystem.ferme();
+        }
     }
 
     // Called once the command ends or is interrupted.
