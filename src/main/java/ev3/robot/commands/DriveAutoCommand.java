@@ -10,6 +10,7 @@ public class DriveAutoCommand extends Command {
     private int mXSpeed;
     private int mZRotation;
     private double mDistance;
+    private double mdistanceactual;
 
     public DriveAutoCommand(DriveSubsystem driveSubsystem, int x, int z, double distance) {
         mDriveSubsystem = driveSubsystem;
@@ -23,6 +24,7 @@ public class DriveAutoCommand extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        mdistanceactual = mDriveSubsystem.distanceParcourueCm();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -40,6 +42,7 @@ public class DriveAutoCommand extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return mDriveSubsystem.distanceParcourueCm() > mDistance;
+        return mDriveSubsystem.distanceParcourueCm() > mdistanceactual + mDistance;
     }
+
 }

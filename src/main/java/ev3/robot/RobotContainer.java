@@ -9,6 +9,7 @@ import ev3.robot.commandGroups.AutonomousCommandGroup;
 import ev3.robot.commands.DriveCommand;
 import ev3.robot.commands.TestBrasCommand;
 import ev3.robot.subsystems.BrasSubsystem;
+import ev3.robot.subsystems.CouleurSubsystem;
 import ev3.robot.subsystems.DriveSubsystem;
 
 public class RobotContainer {
@@ -19,6 +20,7 @@ public class RobotContainer {
     private final BrasSubsystem mBrasSubsystem = new BrasSubsystem();
     private final TestBrasCommand mTestBrasCommand = new TestBrasCommand(mBrasSubsystem);
     private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
+    private final CouleurSubsystem mCouleurSubsystem = new CouleurSubsystem();
 
     private final AutonomousCommandGroup mAutonomousCommandGroup = new AutonomousCommandGroup(mDriveSubsystem);
 
