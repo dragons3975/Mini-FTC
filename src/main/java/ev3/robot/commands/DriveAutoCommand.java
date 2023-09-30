@@ -4,14 +4,15 @@ import edu.wpi.first.wpilibj2.command.Command;
 import ev3.robot.subsystems.DriveSubsystem;
 
 public class DriveAutoCommand extends Command {
-
     private final DriveSubsystem mDriveSubsystem;
+    private double mDistance;
 
-    private int mXSpeed;
-    private int mZRotation;
+    private double mXSpeed;
+    private double mZRotation;
 
-    public DriveAutoCommand(DriveSubsystem driveSubsystem, int x, int z) {
+    public DriveAutoCommand(DriveSubsystem driveSubsystem, double x, double z, double distance) {
         mDriveSubsystem = driveSubsystem;
+        mDistance = distance;
 
         mXSpeed = x;
         mZRotation = z;
@@ -22,6 +23,7 @@ public class DriveAutoCommand extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        mDriveSubsystem.resetTachos();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -39,8 +41,11 @@ public class DriveAutoCommand extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
+        if (mDriveSubsystem.getCentimetreParcourus() > mDistance) {
+            return true;
+        }
+        return false;
         // Commande infinie car la commande sera appellée avec un withTimeout()
         // donc elle sera interrompue à la fin du timeout
-        return false;
     }
 }

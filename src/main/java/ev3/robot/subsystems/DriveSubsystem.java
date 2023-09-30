@@ -1,5 +1,6 @@
 package ev3.robot.subsystems;
 
+import edu.wpi.first.hal.DriverStationJNI.Telemetry;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import ev3dev.actuators.lego.motors.EV3LargeRegulatedMotor;
@@ -23,11 +24,20 @@ public class DriveSubsystem extends Subsystem {
     @Override
     public void periodic() {
         m_robotDrive.arcadeDrive(m_xSpeed, m_zRotation);
+        Telemetry.putNumber("distance", getCentimetreParcourus());
     }
 
     public void arcadeDrive(double xSpeed, double zRotation){
         m_xSpeed = xSpeed;
         m_zRotation = zRotation;
+    }
+
+    public void resetTachos() {
+        m_leftMotor.resetTachoCount();
+    }
+
+    public double getCentimetreParcourus() {
+        return (m_leftMotor.getTachoCount() * ((Math.PI * 9.5) / 360));
     }
 
     public void stop () {
