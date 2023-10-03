@@ -32,7 +32,7 @@ private final TestBrasCommand mTestBrasCommand = new TestBrasCommand(mBrasSubsys
 
     private void configureButtonBindings() {
         JoystickButton buttonA = new JoystickButton(mXboxController, Button.kA.value);
-        buttonA.whileTrue(mTestBrasCommand);
+        buttonA.onTrue(mTestBrasCommand);
     }
 
     private void configureDefaultCommands() {
