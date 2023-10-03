@@ -16,11 +16,12 @@ public class BrasSubsystem extends Subsystem {
     }
 
     public void ferme() {
-        m_moteurPince.set(-2);
+        m_moteurPince.set(-1);
     }
 
     public void ouvre() {
-        m_moteurPince.set(2);
+        m_moteurPince.set(1);
+        System.out.println("ouvre");
     }
 
     public void stop () {
