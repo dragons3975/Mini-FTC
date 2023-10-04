@@ -6,7 +6,7 @@ plugins {
     id 'idea'
     id 'org.hidetake.ssh' version '2.10.1'
     id "net.ossindex.audit" version "0.4.5-beta"
-    id "com.github.johnrengelman.shadow" version "4.0.3"
+    id "com.github.johnrengelman.shadow" version "8.1.1"
 }
 
 version = '1.0.0'
@@ -33,7 +33,7 @@ dependencies {
     //Serial
     implementation "com.fazecast:jSerialComm:[2.0.0,3.0.0)"
     
-    implementation files('libs/DragonsWPILib-1.0.0.jar')
+    implementation files('libs/DragonsWPILib-1.0.0-all.jar')
 }
 
 compileJava.options.encoding = 'UTF-8'
@@ -46,17 +46,14 @@ compileJava {
 
 //Jar
 jar {
-    baseName = "${rootProject.name}"
     manifest {
         from file("${projectDir}/src/main/resources/META-INF/MANIFEST.MF")
     }
 }
 
-task fatJar {
-    doLast {
-    }
+shadowJar {
+  minimize()
 }
-fatJar.dependsOn shadowJar
 
 apply from: './config.gradle'
 apply from: './gradle/deploy.gradle'
