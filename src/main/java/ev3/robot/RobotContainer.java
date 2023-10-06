@@ -10,16 +10,17 @@ import ev3.robot.commands.BrasTestCommand;
 import ev3.robot.commands.DriveCommand;
 import ev3.robot.subsystems.BrasSubsystem;
 import ev3.robot.subsystems.DriveSubsystem;
+import ev3.robot.subsystems.CouleurSubsystem;
 
 public class RobotContainer {
 
     private final XboxController mXboxController = new XboxController(OIConstants.kDriverControllerPort);
-
+    private final CouleurSubsystem mCouleurSubsystem = new CouleurSubsystem();
     private final DriveSubsystem mDriveSubsystem = new DriveSubsystem();
     private final BrasSubsystem mBrasSubsystem = new BrasSubsystem();
     private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
     private final BrasTestCommand mBrasTestCommand = new BrasTestCommand(mBrasSubsystem);
-
+    
     private final AutonomousCommandGroup mAutonomousCommandGroup;
 
     public RobotContainer() {
