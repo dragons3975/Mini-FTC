@@ -59,9 +59,11 @@ void setup() {
   }
   for (i = 0; i < sizeof(encoderChannelAPin); i++)
   {
-    pinMode(encoderChannelAPin[i], INPUT);
-    pinMode(encoderChannelBPin[i], INPUT);
+    pinMode(encoderChannelAPin[i], INPUT_PULLUP);
+    pinMode(encoderChannelBPin[i], INPUT_PULLUP);
   }
+  attachInterrupt(digitalPinToInterrupt(encoderChannelAPin[0]), motor0EncoderHandler, RISING);
+  attachInterrupt(digitalPinToInterrupt(encoderChannelAPin[1]), motor1EncoderHandler, RISING);
   Serial.begin(115200);
   //mySerial.begin(38400);
 }
@@ -87,26 +89,41 @@ void updateMotors()
   }
 }
 
-void checkEncoders()
+void readChannelB(byte index)
 {
-  for (i = 0; i < sizeof(encoderChannelAPin); i++)
+  if (digitalRead(encoderChannelBPin[index]))
+  {
+    encoderValue[index]++;
+  }
+  else
+  {
+    encoderValue[index]--;
+  }
+}
+
+void checkEncoders2And3()
+{
+  for (i = 2; i < sizeof(encoderChannelAPin); i++)
   {
     encoderChannelACurrentState[i] = digitalRead(encoderChannelAPin[i]);
     if (encoderChannelAPrevPrevPrevState[i] == LOW && encoderChannelAPrevPrevState[i] == LOW && encoderChannelAPrevState[i] == HIGH && encoderChannelACurrentState[i] == HIGH)
     {
-      if (digitalRead(encoderChannelBPin[i]))
-      {
-        encoderValue[i]++;
-      }
-      else
-      {
-        encoderValue[i]--;
-      }
+      readChannelB[i];
     }
     encoderChannelAPrevPrevPrevState[i] = encoderChannelAPrevPrevState[i];
     encoderChannelAPrevPrevState[i] = encoderChannelAPrevState[i];
     encoderChannelAPrevState[i] = encoderChannelACurrentState[i];
   }
+}
+
+void motor0EncoderHandler()
+{
+  readChannelB(0);
+}
+
+void motor1EncoderHandler()
+{
+  readChannelB(1);
 }
 
 void checkIncomingData()
@@ -178,7 +195,7 @@ void loop()
   
   checkIncomingData();
   doReceiveDataStateMachine();
-  checkEncoders();
+  checkEncoders2And3(); // 0 et 1 sont sur interruptions
   updateMotors();
   
 }
