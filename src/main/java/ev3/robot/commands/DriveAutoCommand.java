@@ -27,7 +27,7 @@ public class DriveAutoCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        mDriveSubsystem.arcadeDrive(mXSpeed, mZRotation);
+        mDriveSubsystem.mecanumDrive(mXSpeed, mZRotation, mXSpeed);
     }
 
     // Called once the command ends or is interrupted.
