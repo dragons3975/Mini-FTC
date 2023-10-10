@@ -1,6 +1,5 @@
 package ev3.robot.subsystems;
 
-import edu.wpi.first.hal.DriverStationJNI;
 import edu.wpi.first.hal.DriverStationJNI.Telemetry;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Subsystem;
@@ -14,12 +13,15 @@ public class DriveSubsystem extends Subsystem {
 
     private final EV3LargeRegulatedMotor m_leftMotor = new EV3LargeRegulatedMotor(MotorPort.A);
     private final EV3LargeRegulatedMotor m_rightMotor = new EV3LargeRegulatedMotor(MotorPort.B);
-    private static EV3GyroSensor m_gyroSensor = new EV3GyroSensor(SensorPort.S1);
+
+    private final EV3GyroSensor m_gyroSensor = new EV3GyroSensor(SensorPort.S1);
     
     private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
-    private static double degre = 0;
-    final SampleProvider sp = m_gyroSensor.getAngleAndRateMode();
+    private final SampleProvider m_gyroSampleProvider = m_gyroSensor.getAngleAndRateMode();
+    private float[] m_gyroSample = new float[m_gyroSampleProvider.sampleSize()];
+    private double m_degre = 0;
+
     private double m_xSpeed = 0;
     private double m_zRotation = 0; 
 
@@ -32,17 +34,17 @@ public class DriveSubsystem extends Subsystem {
     public void periodic() {
         m_robotDrive.arcadeDrive(m_xSpeed, m_zRotation);
         Telemetry.putNumber("distance", getCentimetreParcourus());
-        float [] sample = new float[sp.sampleSize()];
-        sp.fetchSample(sample, 0);
-        degre = (int)sample[0];
-        Telemetry.putNumber("degre", degre);
+
+        m_gyroSampleProvider.fetchSample(m_gyroSample, 0);
+        m_degre = (int)m_gyroSample[0];
+        Telemetry.putNumber("degre", m_degre);
     }
 
-    public static double getDegre() {
-        return degre;
+    public double getDegre() {
+        return m_degre;
     }
 
-    public void arcadeDrive(double xSpeed, double zRotation){
+    public void arcadeDrive(double xSpeed, double zRotation) {
         m_xSpeed = xSpeed;
         m_zRotation = zRotation;
     }

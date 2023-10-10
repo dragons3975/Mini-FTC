@@ -6,8 +6,9 @@ import ev3.robot.subsystems.DriveSubsystem;
 public class GyroCommand extends Command {
 
     private final DriveSubsystem mDriveSubsystem;
+
+    private double mDegreInitial;
     private final double mDegre;
-    private final double degreActuel = DriveSubsystem.getDegre();
 
     public GyroCommand(DriveSubsystem driveSubsystem, double degre) {
         mDriveSubsystem = driveSubsystem;
@@ -19,19 +20,19 @@ public class GyroCommand extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        mDegreInitial = mDriveSubsystem.getDegre();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        System.out.println(degreActuel);
         if (mDegre > 0) {
-            if (DriveSubsystem.getDegre() >= (degreActuel + mDegre)) {
+            if (mDriveSubsystem.getDegre() >= (mDegreInitial + mDegre)) {
                 mDriveSubsystem.arcadeDrive(0, 1);
             }
         }
         else {
-            if (DriveSubsystem.getDegre() <= (degreActuel + mDegre)) {
+            if (mDriveSubsystem.getDegre() <= (mDegreInitial + mDegre)) {
                 mDriveSubsystem.arcadeDrive(0, -1);
             }
         }
