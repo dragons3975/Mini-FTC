@@ -24,7 +24,7 @@ public class RobotContainer {
     private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
     private final TestBrasCommand mTestBrasCommand = new TestBrasCommand(mBrasSubsystem);
     
-    private final LeftCommandGroup mLeftCommandGroup = new LeftCommandGroup();
+    private final LeftCommandGroup mLeftCommandGroup = new LeftCommandGroup(mDriveSubsystem);
     private final MiddleCommandGroup mMiddleCommandGroup = new MiddleCommandGroup();
     private final RightCommandGroup mRightCommandGroup = new RightCommandGroup();
 
