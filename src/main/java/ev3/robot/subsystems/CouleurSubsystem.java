@@ -28,7 +28,7 @@ public class CouleurSubsystem extends Subsystem {
             Telemetry.putData("couleur","vert");
         }
         if (getcolor()==Color.MAGENTA){
-            Telemetry.putData("couleur","rose")
+            Telemetry.putData("couleur","rose");
         }
         if (getcolor()== Color.ORANGE){
             Telemetry.putData("couleur", "orange");
