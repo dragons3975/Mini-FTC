@@ -27,14 +27,10 @@ public class GyroCommand extends Command {
     @Override
     public void execute() {
         if (mDegre > 0) {
-            if (mDriveSubsystem.getDegre() >= (mDegreInitial + mDegre)) {
-                mDriveSubsystem.arcadeDrive(0, 1);
-            }
+            mDriveSubsystem.arcadeDrive(0, 1);
         }
         else {
-            if (mDriveSubsystem.getDegre() <= (mDegreInitial + mDegre)) {
-                mDriveSubsystem.arcadeDrive(0, -1);
-            }
+            mDriveSubsystem.arcadeDrive(0, -1);
         }
     }
 
@@ -47,6 +43,11 @@ public class GyroCommand extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        return false;
+        if (mDegre > 0) {
+            return (mDriveSubsystem.getDegre() >= mDegreInitial + mDegre);
+        }
+        else {
+            return (mDriveSubsystem.getDegre() <= mDegreInitial + mDegre);
+        }
     }
 }

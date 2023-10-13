@@ -21,7 +21,6 @@ public class BrasSubsystem extends Subsystem {
 
     public void ouvre() {
         m_moteurPince.set(1);
-        System.out.println("ouvre");
     }
 
     public void stop () {
