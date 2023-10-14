@@ -26,12 +26,7 @@ public class GyroCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (mDegre > 0) {
-            mDriveSubsystem.arcadeDrive(0, 1);
-        }
-        else {
-            mDriveSubsystem.arcadeDrive(0, -1);
-        }
+        mDriveSubsystem.autoDrive(0, mDegre);
     }
 
     // Called once the command ends or is interrupted.
@@ -43,11 +38,6 @@ public class GyroCommand extends Command {
     // Returns true when the command should end.
     @Override
     public boolean isFinished() {
-        if (mDegre > 0) {
-            return (mDriveSubsystem.getDegre() >= mDegreInitial + mDegre);
-        }
-        else {
-            return (mDriveSubsystem.getDegre() <= mDegreInitial + mDegre);
-        }
+        return mDriveSubsystem.isAtSettPoint();
     }
 }

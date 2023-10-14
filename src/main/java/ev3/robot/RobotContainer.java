@@ -50,18 +50,18 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        if (mCouleurSubsistem.getColorID() == 5) {
-            return mAutonomousCommandGroup;
-        }
-        else if (mCouleurSubsistem.getColorID() == 3) {
-            return mAutonomousCommandGroup2;
-        }
-        else if (mCouleurSubsistem.getColorID() == 2) {
-            return mAutonomousCommandGroup3;
-        }
-        else {
-            return null;
-        }
+        //if (mCouleurSubsistem.getColorID() == 5) {
+        return mAutonomousCommandGroup;
+        //}
+        //else if (mCouleurSubsistem.getColorID() == 3) {
+        //    return mAutonomousCommandGroup2;
+        //}
+        //else if (mCouleurSubsistem.getColorID() == 2) {
+        //    return mAutonomousCommandGroup3;
+        //}
+        //else {
+        //    return null;
+        //}
         
     }
 }
