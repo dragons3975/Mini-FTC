@@ -21,8 +21,7 @@ public class AutonomousCommandGroup extends SequentialCommandGroup {
             //avancerNbr,
             tourner90Degre,
             avancerNbr,
-            tournerMoins360Degre,
-            avancerNbr
+            tournerMoins360Degre
             //avancer5sec,
             //tourner1sec,
             //reculer5sec

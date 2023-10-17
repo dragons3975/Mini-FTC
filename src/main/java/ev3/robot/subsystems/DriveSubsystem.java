@@ -35,6 +35,7 @@ public class DriveSubsystem extends Subsystem {
         m_leftMotor.brake();
         m_rightMotor.brake();
         resetGyro();
+        m_zPID.setTolerance(5);
     }
 
     @Override
