@@ -9,12 +9,16 @@ public class DriveAutoCommand extends Command {
 
     private int mXSpeed;
     private int mZRotation;
+    private double mConsigneDistanceCm;
+    private double mDistanceInitiale;
 
-    public DriveAutoCommand(DriveSubsystem driveSubsystem, int x, int z) {
+    public DriveAutoCommand(DriveSubsystem driveSubsystem, int x, int z, double distance) {
         mDriveSubsystem = driveSubsystem;
 
         mXSpeed = x;
-        mZRotation = z;
+        mZRotation = z; 
+        mConsigneDistanceCm = distance;
+
 
         addRequirements(driveSubsystem);
     }
@@ -22,6 +26,7 @@ public class DriveAutoCommand extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        mDistanceInitiale = mDriveSubsystem.getDistanceCm();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
@@ -41,6 +46,6 @@ public class DriveAutoCommand extends Command {
     public boolean isFinished() {
         // Commande infinie car la commande sera appellée avec un withTimeout()
         // donc elle sera interrompue à la fin du timeout
-        return false;
+        return mDriveSubsystem.getDistanceCm() >= mDistanceInitiale + mConsigneDistanceCm;
     }
 }
