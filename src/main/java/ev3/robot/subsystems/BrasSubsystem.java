@@ -8,7 +8,7 @@ import lejos.hardware.port.SensorPort;
 
 public class BrasSubsystem extends Subsystem {
 
-    private final EV3TouchSensor mTouch = new EV3TouchSensor(SensorPort.S1);
+    
    
     public BrasSubsystem() {
     }
@@ -19,9 +19,6 @@ public class BrasSubsystem extends Subsystem {
 
     public void mars(double sped) {
         //mMiddleMotor.set(sped);
-    }
-    public boolean isTouched() {
-        return mTouch.isPressed();
     }
     
     public void stop() {
