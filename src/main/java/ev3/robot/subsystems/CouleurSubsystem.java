@@ -15,34 +15,37 @@ public class CouleurSubsystem extends Subsystem {
 
     @Override
     public void periodic() {
-        if (getcolor() == Color.BLACK) {
+        
+        int couleur = getcolor();
+
+        if (couleur == Color.BLACK) {
             Telemetry.putData("couleur", "Noir");
         }
-        if (getcolor() == Color.BLUE) {
+        if (couleur == Color.BLUE) {
             Telemetry.putData("couleur", "Bleu");
         } 
-        if (getcolor()== Color.BROWN) {
+        if (couleur == Color.BROWN) {
             Telemetry.putData("couleur", "Brun");
         }
-        if (getcolor()== Color.GREEN) {
+        if (couleur == Color.GREEN) {
             Telemetry.putData("couleur","Vert");
         }
-        if (getcolor()== Color.MAGENTA) {
+        if (couleur == Color.MAGENTA) {
             Telemetry.putData("couleur", "Rose");
         }
-        if (getcolor()== Color.NONE) {
+        if (couleur == Color.NONE) {
             Telemetry.putData("couleur", "Aucun");
         }
-        if (getcolor()== Color.ORANGE) {
+        if (couleur == Color.ORANGE) {
             Telemetry.putData("couleur", "Orange");
         }
-        if (getcolor()== Color.RED) {
+        if (couleur == Color.RED) {
             Telemetry.putData("couleur", "Rouge");
         }
-        if (getcolor()== Color.WHITE) {
+        if (couleur == Color.WHITE) {
             Telemetry.putData("couleur", "Blanch");
         }
-        if (getcolor()== Color.YELLOW) {
+        if (couleur == Color.YELLOW) {
             Telemetry.putData("couleur", "Jaune");
         }
     }
