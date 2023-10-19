@@ -145,21 +145,6 @@ void readChannelB(byte index)
   }
 }
 
-/*void checkEncoders2And3()
-{
-  for (i = 2; i < sizeof(encoderChannelAPin); i++)
-  {
-    encoderChannelACurrentState[i] = digitalRead(encoderChannelAPin[i]);
-    if (encoderChannelAPrevPrevPrevState[i] == LOW && encoderChannelAPrevPrevState[i] == LOW && encoderChannelAPrevState[i] == HIGH && encoderChannelACurrentState[i] == HIGH)
-    {
-      readChannelB[i];
-    }
-    encoderChannelAPrevPrevPrevState[i] = encoderChannelAPrevPrevState[i];
-    encoderChannelAPrevPrevState[i] = encoderChannelAPrevState[i];
-    encoderChannelAPrevState[i] = encoderChannelACurrentState[i];
-  }
-}*/
-
 void motor0EncoderHandler()
 {
   readChannelB(0);
@@ -170,77 +155,20 @@ void motor1EncoderHandler()
   readChannelB(1);
 }
 
-void checkIncomingData()
-{
-  if (!dataAvailable && Serial.available())
-  {
-    incomingByte = Serial.read();
-    dataAvailable = true;
-  }
-}
-
-void doReceiveDataStateMachine()
-{
-  switch (state)
-  {
-    case WAITING_HEADER:
-      if (dataAvailable)
-      {
-        header = incomingByte;
-        //mySerial.write(header);
-        dataAvailable = false;
-        if (header == GET || header == SET)
-        {
-          state = WAITING_KEY;
-        }
-      }
-      break;
-    case WAITING_KEY:
-      if (dataAvailable)
-      {
-        key = incomingByte;
-        //mySerial.write(key);
-        dataAvailable = false;
-        if (header == GET)
-        {
-          state = DO_GET;
-        }
-        else // header == SET
-        {
-          state = WAITING_VALUE;
-        }
-      }
-      break;
-    case WAITING_VALUE:
-      if (dataAvailable)
-      {
-        value = incomingByte;
-        //mySerial.write(value);
-        dataAvailable = false;
-        state = DO_SET;
-      }
-      break;
-    case DO_GET:
-      Serial.write(dataArray + key, dataSize[key]);
-      //mySerial.write(dataArray[key]);
-      state = WAITING_HEADER;
-      break;
-    case DO_SET:
-      dataArray[key] = value;
-      state = WAITING_HEADER;
-      break;
-    default:
-      break;
-  }
-}
-
 void loop()
 {
-  
-  checkIncomingData();
-  doReceiveDataStateMachine();
-  //checkEncoders2And3(); // 0 et 1 sont sur interruptions
+  dataArray[SERVO_PORT] = 2;
+  dataArray[SERVO_POSITION] = 100;
+  dataArray[SERVO_UPDATE] = 1;
   updateMotors();
   updateServos();
+  delay(1000);
+  
+  dataArray[SERVO_PORT] = 2;
+  dataArray[SERVO_POSITION] = 0;
+  dataArray[SERVO_UPDATE] = 1;
+  updateMotors();
+  updateServos();
+  delay(1000);
   
 }
