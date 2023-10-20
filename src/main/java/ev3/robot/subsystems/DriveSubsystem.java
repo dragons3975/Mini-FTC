@@ -16,7 +16,7 @@ public class DriveSubsystem extends Subsystem {
     private final EV3LargeRegulatedMotor m_rightMotor = new EV3LargeRegulatedMotor(MotorPort.B);
 
     private final EV3GyroSensor m_gyroSensor = new EV3GyroSensor(SensorPort.S1);
-    private final PIDController m_zPID = new PIDController(0.03, 0, 0);
+    private final PIDController m_zPID = new PIDController(0.025, 0, 0);
     
     private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
@@ -35,7 +35,7 @@ public class DriveSubsystem extends Subsystem {
         m_leftMotor.brake();
         m_rightMotor.brake();
         resetGyro();
-        m_zPID.setTolerance(5);
+        m_zPID.setTolerance(3);
     }
 
     @Override
