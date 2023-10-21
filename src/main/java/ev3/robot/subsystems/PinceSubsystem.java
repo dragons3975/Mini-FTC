@@ -14,13 +14,17 @@ public class PinceSubsystem extends Subsystem {
     private boolean mPosition = false;
 
     public PinceSubsystem() {
+        mServoPince.setInverted(true);
     }
 
     @Override
     public void periodic() {
         double encodeur = mServoPince.getTachoCount();
-        Telemetry.putNumber("Angle", encodeur);
-        mServoPince.set(mPID.calculate(encodeur, mangle));
+        Telemetry.putNumber("Angle", mangle);
+        Telemetry.putNumber("encodeur", encodeur);
+        double consigne = mPID.calculate(encodeur, mangle);
+        Telemetry.putNumber("consigne", consigne);
+        mServoPince.set(consigne);
     }
 
     public void open() {
