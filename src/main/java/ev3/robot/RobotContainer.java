@@ -6,7 +6,9 @@ import ev3.robot.Constants.OIConstants;
 import ev3.robot.commandGroups.AutonomousCommandGroup;
 import ev3.robot.commands.DriveCommand;
 import ev3.robot.subsystems.BrasSubsystem;
+import ev3.robot.subsystems.ColorSubsystem;
 import ev3.robot.subsystems.DriveSubsystem;
+import lejos.robotics.Color;
 
 public class RobotContainer {
 
@@ -15,6 +17,7 @@ public class RobotContainer {
     private final DriveSubsystem mDriveSubsystem = new DriveSubsystem();
     private final BrasSubsystem mBrasSubsystem = new BrasSubsystem();
     private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
+    private final ColorSubsystem mColorSubsystem = new ColorSubsystem();
 
     private final AutonomousCommandGroup mAutonomousCommandGroup;
 
@@ -36,6 +39,14 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
+        if (mColorSubsystem.GetColorID() == Color.RED){
+            return mAutonomousCommandGroup;
+
+        } else if (mColorSubsystem.GetColorID() == Color.GREEN) {
+            return mAutonomousCommandGroup;
+        } else if (mColorSubsystem.GetColorID() == Color.RED) {
+            return mAutonomousCommandGroup;
+        }
         return mAutonomousCommandGroup;
         
     }

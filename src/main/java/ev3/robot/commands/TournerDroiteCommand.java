@@ -4,33 +4,36 @@ import edu.wpi.first.wpilibj2.command.Command;
 import ev3.robot.subsystems.DriveSubsystem;
 
 
-public class AvanceAutoCommand extends Command {
+public class TournerDroiteCommand extends Command {
 
     private final DriveSubsystem mDriveSubsystem;
 
-    private int mXSpeed;
-    private double Parcourue; 
-    private double Parcourir;
+    private int m_zRotation;
+    private int Parcourue; 
+    private int Parcourir;
+    private int gyroInitial; 
+    private int gyroFinished;
 
-    public AvanceAutoCommand(DriveSubsystem driveSubsystem, int x, double p_CM) {
+    public TournerDroiteCommand(DriveSubsystem driveSubsystem, int z, int angle) {
         mDriveSubsystem = driveSubsystem;
-        Parcourir = p_CM;
+        Parcourir = angle;
         
-        mXSpeed = x;
+        m_zRotation = z;
         addRequirements(driveSubsystem);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        mDriveSubsystem.resetEncoders();
+        gyroInitial = mDriveSubsystem.getAngleGyro();
+        
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        Parcourue = mDriveSubsystem.getDistance();
-        mDriveSubsystem.arcadeDrive(mXSpeed, 0);
+        Parcourue = mDriveSubsystem.getAngleGyro();
+        mDriveSubsystem.arcadeDrive(0, m_zRotation);
     
 
     }
@@ -47,6 +50,8 @@ public class AvanceAutoCommand extends Command {
     public boolean isFinished() {
         // Commande infinie car la commande sera appellée avec un withTimeout()
         // donc elle sera interrompue à la fin du timeout
-        return Parcourue >= Parcourir;
+        
+
+        return Parcourue >= gyroInitial + Parcourir;
     }
 }
