@@ -7,7 +7,6 @@ public class GyroCommand extends Command {
 
     private final DriveSubsystem mDriveSubsystem;
 
-    private double mDegreInitial;
     private final double mDegre;
 
     public GyroCommand(DriveSubsystem driveSubsystem, double degre) {
@@ -20,13 +19,12 @@ public class GyroCommand extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        mDegreInitial = mDriveSubsystem.getDegre();
+        mDriveSubsystem.autoDrive(0, mDegre);
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        mDriveSubsystem.autoDrive(0, mDegre);
     }
 
     // Called once the command ends or is interrupted.

@@ -4,6 +4,7 @@ import edu.wpi.first.hal.DriverStationJNI.Telemetry;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import ev3.robot.Constants;
 import ev3dev.actuators.lego.motors.EV3LargeRegulatedMotor;
 import ev3dev.sensors.ev3.EV3GyroSensor;
 import lejos.hardware.port.MotorPort;
@@ -16,7 +17,7 @@ public class DriveSubsystem extends Subsystem {
     private final EV3LargeRegulatedMotor m_rightMotor = new EV3LargeRegulatedMotor(MotorPort.B);
 
     private final EV3GyroSensor m_gyroSensor = new EV3GyroSensor(SensorPort.S1);
-    private final PIDController m_zPID = new PIDController(0.025, 0, 0);
+    private final PIDController m_zPID = new PIDController(0.02, 0, 0);
     
     private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
@@ -26,7 +27,7 @@ public class DriveSubsystem extends Subsystem {
     private double m_degreOffset = 0;
 
     private double m_xSpeed = 0;
-    private double m_zRotation = 0; 
+    private double m_zRotation = 0;
 
     private boolean m_zPID_enabled = false;
     private double m_zTarget = 0;
@@ -76,7 +77,7 @@ public class DriveSubsystem extends Subsystem {
 
     public void autoDrive(double xSpeed, double zAngle) {
         m_xSpeed = xSpeed;
-        m_zTarget = zAngle;
+        m_zTarget = getDegre() + zAngle;
         m_zPID_enabled = true;
     }
 
@@ -85,7 +86,7 @@ public class DriveSubsystem extends Subsystem {
     }
 
     public double getCentimetreParcourus() {
-        return (m_leftMotor.getTachoCount() * ((Math.PI * 9.5) / 360));
+        return (m_leftMotor.getTachoCount() * ((Math.PI * Constants.RobotsConstants.KDiametreRoue) / 360));
     }
 
     public void stop () {
