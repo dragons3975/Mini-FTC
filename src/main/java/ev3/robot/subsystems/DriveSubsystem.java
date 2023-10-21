@@ -1,13 +1,14 @@
 package ev3.robot.subsystems;
 
 import edu.wpi.first.hal.DriverStationJNI.Telemetry;
+//import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import ev3.robot.Constants;
 import ev3dev.actuators.lego.motors.EV3LargeRegulatedMotor;
 import ev3dev.sensors.ev3.EV3GyroSensor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
-import lejos.robotics.SampleProvider;
 
 public class DriveSubsystem extends Subsystem {
 
@@ -15,9 +16,10 @@ public class DriveSubsystem extends Subsystem {
     private final EV3LargeRegulatedMotor m_rightMotor = new EV3LargeRegulatedMotor(MotorPort.B);
 
     private final EV3GyroSensor m_GyroSensor = new EV3GyroSensor(SensorPort.S4);
-    private final SampleProvider m_Provider = m_GyroSensor.getAngleMode();
-    private final float[] m_sample = new float[m_Provider.sampleSize()];
     private int m_angle = 0;
+    private double m_distance = 0;
+
+
 
     private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
@@ -33,9 +35,11 @@ public class DriveSubsystem extends Subsystem {
     public void periodic() {
         m_robotDrive.arcadeDrive(m_xSpeed, m_zRotation);
 
-        m_Provider.fetchSample(m_sample, 0);
-        m_angle = (int)m_sample[0];
+        m_angle = m_GyroSensor.getAngle();
         Telemetry.putNumber("angle", m_angle);
+
+        m_distance = m_leftMotor.getTachoCount() * Math.PI *  Constants.Robotconstants.k_diametreRoue / 360;
+        Telemetry.putNumber("distance", m_distance);
     }
 
     public void arcadeDrive(double xSpeed, double zRotation){
@@ -43,13 +47,17 @@ public class DriveSubsystem extends Subsystem {
         m_zRotation = zRotation;
     }
 
-    public void stop () {
+    public void stop() {
         m_xSpeed = 0;
         m_zRotation = 0;
     }
 
-    public int getAngle () {
+    public int getAngle() {
         return m_angle;
+    }
+
+    public double distancecm() {
+        return m_distance;
     }
 
 }
