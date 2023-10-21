@@ -8,7 +8,6 @@ import lejos.hardware.port.SensorPort;
 
 public class BrasSubsystem extends Subsystem {
 
-    
    
     public BrasSubsystem() {
     }
