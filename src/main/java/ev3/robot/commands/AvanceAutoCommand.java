@@ -3,18 +3,18 @@ package ev3.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import ev3.robot.subsystems.DriveSubsystem;
 
-public class DriveAutoCommand extends Command {
+public class AvanceAutoCommand extends Command {
 
     private final DriveSubsystem mDriveSubsystem;
+    private double d_distance;
+    private double m_finaldistance;
 
     private int mXSpeed;
-    private int mZRotation;
 
-    public DriveAutoCommand(DriveSubsystem driveSubsystem, int x, int z) {
+    public AvanceAutoCommand(DriveSubsystem driveSubsystem, int x, double consigneCm) {
         mDriveSubsystem = driveSubsystem;
-
+        m_finaldistance = consigneCm;
         mXSpeed = x;
-        mZRotation = z;
 
         addRequirements(driveSubsystem);
     }
@@ -27,7 +27,8 @@ public class DriveAutoCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        mDriveSubsystem.arcadeDrive(mXSpeed, mZRotation);
+        d_distance = mDriveSubsystem.distance();
+        mDriveSubsystem.arcadeDrive(mXSpeed, 0);
     }
 
     // Called once the command ends or is interrupted.
@@ -41,6 +42,7 @@ public class DriveAutoCommand extends Command {
     public boolean isFinished() {
         // Commande infinie car la commande sera appellée avec un withTimeout()
         // donc elle sera interrompue à la fin du timeout
-        return false;
+
+        return d_distance >= m_finaldistance;
     }
 }

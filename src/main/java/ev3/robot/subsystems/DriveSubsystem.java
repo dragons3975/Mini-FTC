@@ -2,6 +2,7 @@ package ev3.robot.subsystems;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import ev3.robot.Constants;
 import ev3dev.actuators.lego.motors.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
 
@@ -14,6 +15,8 @@ public class DriveSubsystem extends Subsystem {
 
     private double m_xSpeed = 0; // The robot's speed along the X axis [-1.0..1.0]. Forward is positive.
     private double m_zRotation = 0; // The robot's rotation rate around the Z axis [-1.0..1.0]. Clockwise is positive.
+    private double m_turns;
+    private double m_distance;
 
     public DriveSubsystem() {
         m_leftMotor.brake();
@@ -23,6 +26,13 @@ public class DriveSubsystem extends Subsystem {
     @Override
     public void periodic() {
         m_robotDrive.arcadeDrive(m_xSpeed, m_zRotation);
+        
+    }
+
+    public double distance() {
+        m_turns = m_leftMotor.getTachoCount() / 360;
+        m_distance = m_turns * (Constants.RobotConstants.kDiametreRoue * Math.PI);
+        return m_distance;
     }
 
     public void arcadeDrive(double xSpeed, double zRotation){
