@@ -5,5 +5,11 @@ public final class Constants {
     public static final class OIConstants {
         public static final int kDriverControllerPort = 0;
     }
+
+    public static final class RobotConstants {
+        public static final double kDiametreRoue = 9.5;
+        public static final double kCirconference = kDiametreRoue * Math.PI;
+    }
+
     
 }
