@@ -10,7 +10,7 @@ import lejos.hardware.port.SensorPort;
 public class BrasSubsystem extends Subsystem {
 
     private final EV3LargeRegulatedMotor mMoteurBras = new EV3LargeRegulatedMotor(MotorPort.C);
-    private final EV3TouchSensor mtouchsensor = new EV3TouchSensor(SensorPort.S1);
+    //private final EV3TouchSensor mtouchsensor = new EV3TouchSensor(SensorPort.S1);
 
     public BrasSubsystem() {
     }
@@ -33,7 +33,7 @@ public class BrasSubsystem extends Subsystem {
     }
  
     public boolean isCapteurAppuye() { 
-        return mtouchsensor.isPressed();
+        return false;//mtouchsensor.isPressed();
     }
 
     public int tickcount() {
