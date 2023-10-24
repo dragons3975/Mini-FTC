@@ -39,6 +39,7 @@ public class BrasSubsystem extends Subsystem {
 
     public void stop () {
         m_moteurPince.set(0);
+        m_moteurBras.set(0);
     }
 
 }
