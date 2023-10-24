@@ -3,6 +3,7 @@ package ev3.robot.commandGroups;
 import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import ev3.robot.commands.BrasCommand;
 import ev3.robot.commands.DriveAutoCommand;
 import ev3.robot.subsystems.DriveSubsystem;
 import ev3.robot.commands.GyroCommand;
@@ -27,19 +28,19 @@ public class AutonomousCommandGroup extends SequentialCommandGroup {
         addCommands(
             //avancerNbr,
             tourner90Degre,
-            new WaitCommand(1.5),
+            new WaitCommand(2),
             avancerNbr,
-            new WaitCommand(1.5),
+            new WaitCommand(2),
             tourner90Degre2,
-            new WaitCommand(1.5),
+            new WaitCommand(2),
             avancerNbr2,
-            new WaitCommand(1.5),
+            new WaitCommand(2),
             tourner90Degre3,
-            new WaitCommand(1.5),
+            new WaitCommand(2),
             avancerNbr3,
-            new WaitCommand(1.5),
+            new WaitCommand(2),
             tourner90Degre4,
-            new WaitCommand(1.5),
+            new WaitCommand(2),
             avancerNbr4
             //avancer5sec,
             //tourner1sec,

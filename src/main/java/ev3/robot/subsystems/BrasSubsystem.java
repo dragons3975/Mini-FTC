@@ -1,5 +1,6 @@
 package ev3.robot.subsystems;
 
+import dragons.ev3.ArduinoMotor;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import ev3dev.actuators.lego.motors.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
@@ -7,6 +8,7 @@ import lejos.hardware.port.MotorPort;
 public class BrasSubsystem extends Subsystem {
     
     private final EV3MediumRegulatedMotor m_moteurPince = new EV3MediumRegulatedMotor(MotorPort.C);
+    private final ArduinoMotor m_moteurBras = new ArduinoMotor(0);
 
     public BrasSubsystem() {
     }
@@ -21,6 +23,18 @@ public class BrasSubsystem extends Subsystem {
 
     public void ouvre() {
         m_moteurPince.set(1);
+    }
+
+    public void monte() {
+        m_moteurBras.set(-1);
+    }
+
+    public void baisse() {
+        m_moteurBras.set(1);
+    }
+
+    public double getTacho() {
+        return m_moteurBras.getTachoCount();
     }
 
     public void stop () {
