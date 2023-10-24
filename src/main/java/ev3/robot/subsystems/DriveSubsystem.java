@@ -26,6 +26,11 @@ public class DriveSubsystem extends Subsystem {
         m_robotDrive.arcadeDrive(m_xSpeed, m_zRotation);
         Telemetry.putNumber("xSpeed", m_xSpeed);
         Telemetry.putNumber("Left Encoder", m_leftMotor.getTachoCount());
+
+        Telemetry.putNumber("echo: [Double]", Telemetry.readDouble("Double", 1));
+        Telemetry.putNumber("echo: [Int]", Telemetry.readInt("Int", 1));
+        Telemetry.putBoolean("echo: [Boolean]", Telemetry.readBoolean("Boolean", true));
+        Telemetry.putData("echo: [String]", Telemetry.readString("String", "default"));
     }
 
     public void arcadeDrive(double xSpeed, double zRotation){
