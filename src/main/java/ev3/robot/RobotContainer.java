@@ -7,26 +7,33 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import ev3.robot.Constants.OIConstants;
 import ev3.robot.commandGroups.AutonomousCommandGroup;
 import ev3.robot.commandGroups.LeftCommandGroup;
+import ev3.robot.commands.BrasCommandBas;
+import ev3.robot.commands.BrasCommandHaut;
 import ev3.robot.commands.DriveCommand;
-import ev3.robot.commands.RamasseCommand;
-import ev3.robot.commands.TestBrasCommand;
+import ev3.robot.commands.PinceCommandFerme;
+import ev3.robot.commands.PinceCommandOuvre;
 import ev3.robot.subsystems.BrasSubsystem;
 import ev3.robot.subsystems.ColorSubsystem;
 import ev3.robot.subsystems.DriveSubsystem;
-import ev3.robot.subsystems.RamasseurSubsystem;
+import ev3.robot.subsystems.PinceSubsystem;
 
 public class RobotContainer {
 
     private final XboxController mXboxController = new XboxController(OIConstants.kDriverControllerPort);
-    private final RamasseurSubsystem mRamasseurSubsystem = new RamasseurSubsystem();
-    private final RamasseCommand mRamasseCommand = new RamasseCommand(mRamasseurSubsystem);
+    private final XboxController mXboxController2 = new XboxController(OIConstants.kDriverControllerPort2);
+
     private final DriveSubsystem mDriveSubsystem = new DriveSubsystem();
     private final BrasSubsystem mBrasSubsystem = new BrasSubsystem();
     private final ColorSubsystem mColorSubsystem = new ColorSubsystem();
+    private final PinceSubsystem mPinceSubsystem = new PinceSubsystem();
 
     private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
-    private final TestBrasCommand mTestBrasCommand = new TestBrasCommand(mBrasSubsystem);
+    private final BrasCommandHaut mBrasCommandHaut = new BrasCommandHaut(mBrasSubsystem);
+    private final BrasCommandBas mBrasCommandBas = new BrasCommandBas(mBrasSubsystem);
     
+    private final PinceCommandOuvre mPinceCommandOuvre = new PinceCommandOuvre(mPinceSubsystem);
+    private final PinceCommandFerme mPinceCommandFerme = new PinceCommandFerme(mPinceSubsystem);
+
     private final LeftCommandGroup mLeftCommandGroup = new LeftCommandGroup(mDriveSubsystem);
     private final MiddleCommandGroup mMiddleCommandGroup = new MiddleCommandGroup();
     private final RightCommandGroup mRightCommandGroup = new RightCommandGroup();
@@ -42,11 +49,17 @@ public class RobotContainer {
     }
 
     private void configureButtonBindings() {
-        JoystickButton buttonA = new JoystickButton(mXboxController, Button.kA.value);
-        buttonA.onTrue(mTestBrasCommand);
-        
-        JoystickButton buttonY = new JoystickButton(mXboxController, Button.kY.value);
-        buttonY.whileTrue(mRamasseCommand);
+        JoystickButton buttonA = new JoystickButton(mXboxController2, Button.kA.value);
+        buttonA.whileTrue(mBrasCommandBas);
+
+        JoystickButton buttonY = new JoystickButton(mXboxController2, Button.kY.value);
+        buttonY.whileTrue(mBrasCommandHaut);
+
+        JoystickButton buttonX = new JoystickButton(mXboxController2, Button.kX.value);
+        buttonX.whileTrue(mPinceCommandOuvre);
+
+        JoystickButton buttonB = new JoystickButton(mXboxController2, Button.kB.value);
+        buttonB.whileTrue(mPinceCommandFerme);
     }
 
     private void configureDefaultCommands() {

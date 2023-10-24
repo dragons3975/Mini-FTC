@@ -3,11 +3,11 @@ package ev3.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import ev3.robot.subsystems.BrasSubsystem;
 
-public class TestBrasCommand extends Command {
+public class BrasCommandHaut extends Command {
 
     private BrasSubsystem mBrasSubsystem;
     
-    public TestBrasCommand(BrasSubsystem brasSubsystem) {
+    public BrasCommandHaut(BrasSubsystem brasSubsystem) {
         mBrasSubsystem = brasSubsystem;
         addRequirements(brasSubsystem);
     }
@@ -15,12 +15,12 @@ public class TestBrasCommand extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        mBrasSubsystem.MouvementBrasHaut();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        mBrasSubsystem.mars(1.0);
     }
 
     // Called once the command ends or is interrupted.
@@ -34,4 +34,5 @@ public class TestBrasCommand extends Command {
     public boolean isFinished() {
         return false;
     }
+    
 }
