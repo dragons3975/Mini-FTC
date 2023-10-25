@@ -1,6 +1,7 @@
 package ev3.robot.subsystems;
 
 import dragons.ev3.ArduinoMotor;
+import edu.wpi.first.hal.DriverStationJNI.Telemetry;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import ev3dev.actuators.lego.motors.EV3MediumRegulatedMotor;
 import lejos.hardware.port.MotorPort;
@@ -26,11 +27,12 @@ public class BrasSubsystem extends Subsystem {
     }
 
     public void monte() {
-        m_moteurBras.set(-1);
+        m_moteurBras.set(-0.1);
     }
 
     public void baisse() {
-        m_moteurBras.set(1);
+        Telemetry.putData("oui", "oui");;
+        m_moteurBras.set(0.5);
     }
 
     public double getTacho() {

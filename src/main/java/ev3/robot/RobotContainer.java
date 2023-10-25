@@ -47,8 +47,8 @@ public class RobotContainer {
         buttonY.whileTrue(mBrasCommandFerme);
         JoystickButton buttonA = new JoystickButton(mXboxController, Button.kA.value);
         buttonA.whileTrue(mBrasCommandMonte);
-        JoystickButton buttonB = new JoystickButton(mXboxController, Button.kX.value);
-        buttonX.whileTrue(mBrasCommandBaisse);
+        JoystickButton buttonB = new JoystickButton(mXboxController, Button.kB.value);
+        buttonB.whileTrue(mBrasCommandBaisse);
     }
 
     private void configureDefaultCommands() {
