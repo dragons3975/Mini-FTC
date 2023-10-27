@@ -10,11 +10,14 @@ import ev3dev.sensors.ev3.EV3GyroSensor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.SampleProvider;
+import dragons.ev3.ArduinoMotor;
 
 public class DriveSubsystem extends Subsystem {
 
     private final EV3LargeRegulatedMotor m_leftMotor = new EV3LargeRegulatedMotor(MotorPort.A);
     private final EV3LargeRegulatedMotor m_rightMotor = new EV3LargeRegulatedMotor(MotorPort.B);
+    private final ArduinoMotor m_moteurTest = new ArduinoMotor(0);
+    private final ArduinoMotor m_moteurTest2 = new ArduinoMotor(1);
 
     private final EV3GyroSensor m_gyroSensor = new EV3GyroSensor(SensorPort.S1);
     private final PIDController m_zPID = new PIDController(0.02, 0, 0);
@@ -63,6 +66,16 @@ public class DriveSubsystem extends Subsystem {
 
     public double getDegre() {
         return (m_degre - m_degreOffset) % 360;
+    }
+
+    public void roule(boolean dir) {
+        if (dir) {
+            m_moteurTest.set(1);
+            m_moteurTest2.set(1);
+        } else {
+            m_moteurTest.set(-1);
+            m_moteurTest2.set(-1);
+        }
     }
 
     public boolean isAtSettPoint() {
