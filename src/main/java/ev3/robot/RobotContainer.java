@@ -28,15 +28,12 @@ public class RobotContainer {
     private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
     private final BrasTestCommand mBrasTestCommand = new BrasTestCommand(mBrasSubsystem);
     private final TogglePinceCommand mTogglePinceCommand = new TogglePinceCommand(mPinceSubsystem);
-    
 
-    private final AutonomousCommandGroup mAutonomousCommandGroup;
-    private final AutoCommandg1 mAutoCommandg1;
-    private final AutoCommandg2 mAutoCommandg2;
+    private final AutonomousCommandGroup mAutonomousCommandGroup = new AutonomousCommandGroup(mDriveSubsystem);
+    private final AutoCommandg1 mAutoCommandg1 = new AutoCommandg1(mDriveSubsystem);
+    private final AutoCommandg2 mAutoCommandg2 = new AutoCommandg2(mDriveSubsystem);
 
     public RobotContainer() {
-
-        mAutonomousCommandGroup = new AutonomousCommandGroup(mDriveSubsystem);
 
         configureButtonBindings();
         configureDefaultCommands();
