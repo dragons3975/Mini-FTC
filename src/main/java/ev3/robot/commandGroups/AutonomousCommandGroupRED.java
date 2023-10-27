@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import ev3.robot.commands.AvanceAutoCommand;
 import ev3.robot.subsystems.DriveSubsystem;
 
-public class AutonomousCommandGroup extends SequentialCommandGroup {
+public class AutonomousCommandGroupRED extends SequentialCommandGroup {
 
-    public AutonomousCommandGroup(DriveSubsystem driveSubsystem) {
+    public AutonomousCommandGroupRED(DriveSubsystem driveSubsystem) {
 
-        AvanceAutoCommand avancer4cm = new AvanceAutoCommand(driveSubsystem, 1, 4.0);
+        AvanceAutoCommand avancer4cm = new AvanceAutoCommand(driveSubsystem, 1, 100.0);
       
 
         addCommands(
