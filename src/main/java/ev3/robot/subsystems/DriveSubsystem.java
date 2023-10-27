@@ -11,6 +11,10 @@ import lejos.hardware.port.SensorPort;
 
 public class DriveSubsystem extends Subsystem {
 
+
+    //private final ArduinoMotor m_leftMotor = new ArduinoMotor(0);
+    //private final ArduinoMotor m_rightMotor = new ArduinoMotor(0);
+
     private final EV3LargeRegulatedMotor m_leftMotor = new EV3LargeRegulatedMotor(MotorPort.A);
     private final EV3LargeRegulatedMotor m_rightMotor = new EV3LargeRegulatedMotor(MotorPort.B);
     

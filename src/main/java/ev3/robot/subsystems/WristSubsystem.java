@@ -15,6 +15,7 @@ public class WristSubsystem extends Subsystem {
     private final ArduinoMotor m_motorBras3 = new ArduinoMotor(2);
     private final ArduinoMotor m_motorBras4 = new ArduinoMotor(3);
     */
+    //private final ArduinoMotor WristMotor = new ArduinoMotor(0);
 
     private final EV3LargeRegulatedMotor WristMotor = new EV3LargeRegulatedMotor(SensorPort.S3);
 

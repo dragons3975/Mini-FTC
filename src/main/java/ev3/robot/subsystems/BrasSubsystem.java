@@ -17,6 +17,8 @@ public class BrasSubsystem extends Subsystem {
     */
 
     private final EV3LargeRegulatedMotor BrasMotor = new EV3LargeRegulatedMotor(MotorPort.D);
+    //private final ArduinoMotor BrasMotor = new ArduinoMotor(0);
+
 
     public BrasSubsystem() {
     }

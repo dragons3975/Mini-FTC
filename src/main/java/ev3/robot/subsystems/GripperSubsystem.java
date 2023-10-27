@@ -10,12 +10,8 @@ import lejos.hardware.port.SensorPort;
 
 public class GripperSubsystem extends Subsystem {
 
-    /*private final ArduinoMotor m_motorBras1 = new ArduinoMotor(0);
-    private final ArduinoMotor m_motorBras2 = new ArduinoMotor(1);
-    private final ArduinoMotor m_motorBras3 = new ArduinoMotor(2);
-    private final ArduinoMotor m_motorBras4 = new ArduinoMotor(3);
-    */
-
+    
+    //private final ArduinoMotor GripperMotor = new ArduinoMotor(3);
     private final EV3LargeRegulatedMotor GripperMotor = new EV3LargeRegulatedMotor(MotorPort.C);
 
     public GripperSubsystem() {

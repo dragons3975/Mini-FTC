@@ -12,6 +12,7 @@ import lejos.robotics.Color;
 public class ColorSubsystem extends Subsystem {
 
     private final EV3ColorSensor ColorSensor = new EV3ColorSensor(SensorPort.S2);
+   // private final ArduinoMotor ColorSensor = new ArduinoMotor(0);
 
 
 
