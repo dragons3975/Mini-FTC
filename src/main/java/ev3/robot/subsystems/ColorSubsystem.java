@@ -18,7 +18,11 @@ public class ColorSubsystem extends Subsystem {
     public void periodic() {
        Telemetry.putNumber("color", getcolor());
 
-       if (getcolor()==color.RED)
+       if (getcolor()==Color.RED){
+           Telemetry.
+
+       }
+
        
 
 
