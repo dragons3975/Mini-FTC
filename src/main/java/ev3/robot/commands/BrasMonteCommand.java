@@ -4,17 +4,17 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import ev3.robot.subsystems.BrasSubsystem;
 
-public class BrasCommand extends Command {
+public class BrasMonteCommand extends Command {
    
     private XboxController mXboxController;
     private BrasSubsystem mBrasSubsystem;
 
-    public BrasCommand(BrasSubsystem brasSubsystem) { 
+    public BrasMonteCommand(BrasSubsystem brasSubsystem) { 
         mBrasSubsystem = brasSubsystem;
         addRequirements(brasSubsystem);
     }
 
-    public BrasCommand(BrasSubsystem brasSubsystem, XboxController xboxController) { 
+    public BrasMonteCommand(BrasSubsystem brasSubsystem, XboxController xboxController) { 
         mBrasSubsystem = brasSubsystem;
         mXboxController = xboxController;
 
@@ -24,14 +24,14 @@ public class BrasCommand extends Command {
 
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() { 
+    public void initialize() {
+       mBrasSubsystem.SatineMonte(1); 
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        mBrasSubsystem.SatineMonte(mXboxController.getLeftTriggerAxis());
-        mBrasSubsystem.SatineDescend(mXboxController.getLeftTriggerAxis());
+    
     }
 
     // Called once the command ends or is interrupted.

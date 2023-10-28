@@ -7,28 +7,28 @@ import ev3dev.sensors.ev3.EV3TouchSensor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 
-public class BrasSubsystem extends Subsystem {
+public class ExtendSubsystem extends Subsystem {
 
     private EV3TouchSensor mCapteurTactile = new EV3TouchSensor(SensorPort.S1);
-    private ArduinoMotor mMotorBras = new ArduinoMotor(1);
+    private ArduinoMotor mMotorExtend = new ArduinoMotor(0);
   
-    public BrasSubsystem() {
+    public ExtendSubsystem() {
     }
 
     @Override
     public void periodic() {
     }
 
-    public void SatineDescend(double speed) { 
-        mMotorBras.set(0.8);
+    public void SatineExtend(double speed) { 
+        mMotorExtend.set(1);
     }
 
-    public void SatineMonte(double speed) {
-        mMotorBras.set(-0.2);
+    public void SatineRetract(double speed) {
+        mMotorExtend.set(-1);
     }
 
     public void stop() {
-        mMotorBras.set(0);
+        mMotorExtend.set(0);
     }
 
     public boolean isBoutonAppuye() {
