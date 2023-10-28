@@ -7,7 +7,6 @@ import ev3dev.actuators.lego.motors.EV3LargeRegulatedMotor;
 import ev3dev.sensors.ev3.EV3GyroSensor;
 import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
-import lejos.robotics.SampleProvider;
 public class DriveSubsystem extends Subsystem {
 
     private final EV3LargeRegulatedMotor m_frontLeftMotor = new EV3LargeRegulatedMotor(MotorPort.A);
@@ -17,9 +16,7 @@ public class DriveSubsystem extends Subsystem {
     private final MecanumDrive m_robotDrive = new MecanumDrive(m_frontLeftMotor, m_frontRightMotor, m_rearLeftMotor, m_rearRightMotor);
     
     private final EV3GyroSensor mGyro = new EV3GyroSensor(SensorPort.S1);
-    private final SampleProvider mProvider = mGyro.getAngleMode();
     private int mAngle = 0;
-    private float [] mSample = new float[mProvider.sampleSize()];
 
     private double mXSpeed = 0; // The robot's speed along the X axis [-1.0..1.0]. Forward is positive.
     private double mYSpeed = 0;
@@ -45,8 +42,7 @@ public class DriveSubsystem extends Subsystem {
 
      @Override
     public void periodic() {
-        mProvider.fetchSample(mSample, 0);
-        mAngle = (int)mSample[0];
+        mAngle = mGyro.getAngle();
         Telemetry.putNumber("angle", mAngle);
        
         m_robotDrive.driveCartesian(mXSpeed, mYSpeed, mZRotation);
