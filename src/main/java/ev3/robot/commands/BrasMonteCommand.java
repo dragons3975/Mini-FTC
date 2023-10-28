@@ -45,4 +45,5 @@ public class BrasMonteCommand extends Command {
     public boolean isFinished() {
         return mBrasSubsystem.isBoutonAppuye();
     }
-} 
+
+}

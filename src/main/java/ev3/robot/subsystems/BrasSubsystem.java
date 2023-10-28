@@ -20,11 +20,11 @@ public class BrasSubsystem extends Subsystem {
     }
 
     public void SatineDescend(double speed) { 
-        mMotorBras.set(0.8);
+        mMotorBras.set(0.1);
     }
 
     public void SatineMonte(double speed) {
-        mMotorBras.set(-0.2);
+        mMotorBras.set(-0.3);
     }
 
     public void stop() {
