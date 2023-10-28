@@ -1,5 +1,6 @@
 package ev3.robot.subsystems;
 
+import dragons.ev3.ArduinoMotor;
 import edu.wpi.first.hal.DriverStationJNI.Telemetry;
 //import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -14,12 +15,12 @@ public class DriveSubsystem extends Subsystem {
 
     private final EV3LargeRegulatedMotor m_leftMotor = new EV3LargeRegulatedMotor(MotorPort.A);
     private final EV3LargeRegulatedMotor m_rightMotor = new EV3LargeRegulatedMotor(MotorPort.B);
+    
+    private final ArduinoMotor m_CentralMotor = new ArduinoMotor(0);
 
     private final EV3GyroSensor m_GyroSensor = new EV3GyroSensor(SensorPort.S4);
     private int m_angle = 0;
     private double m_distance = 0;
-
-
 
     private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
 
@@ -58,6 +59,10 @@ public class DriveSubsystem extends Subsystem {
 
     public double distancecm() {
         return m_distance;
+    }
+
+    public void strafe(double speed) {
+        m_CentralMotor.set(speed);
     }
 
 }

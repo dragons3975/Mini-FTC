@@ -1,5 +1,6 @@
 package ev3.robot.commands;
 
+import edu.wpi.first.hal.DriverStationJNI.Telemetry;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import ev3.robot.subsystems.DriveSubsystem;
@@ -25,6 +26,22 @@ public class DriveCommand extends Command {
     @Override
     public void execute() {
         mDriveSubsystem.arcadeDrive(-mXboxController.getLeftY(), mXboxController.getRightX());
+        double leftTriggerAxis = (mXboxController.getLeftTriggerAxis() + 1) / 2;
+        double rightTriggerAxis = (mXboxController.getRightTriggerAxis() + 1) / 2;
+
+        Telemetry.putNumber("leftTriggerAxis", leftTriggerAxis);
+        Telemetry.putNumber("RightTriggerAxis", rightTriggerAxis);
+
+
+        if (leftTriggerAxis > 0){  
+            mDriveSubsystem.strafe(leftTriggerAxis);
+        }
+        else
+        {
+            mDriveSubsystem.strafe(-rightTriggerAxis);
+        }
+    
+
     }
 
     // Called once the command ends or is interrupted.

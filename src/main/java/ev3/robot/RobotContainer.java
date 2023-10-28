@@ -19,14 +19,15 @@ import lejos.robotics.Color;
 
 public class RobotContainer {
 
-    private final XboxController mXboxController = new XboxController(OIConstants.kDriverControllerPort);
+    private final XboxController mXboxControllerD = new XboxController(OIConstants.kDriverControllerPort);
+    private final XboxController mXboxControllerCP = new XboxController (OIConstants.kCoPilotControllerPort);
 
     private final DriveSubsystem mDriveSubsystem = new DriveSubsystem();
-    private final BrasSubsystem mBrasSubsystem = new BrasSubsystem();
+    private final BrasSubsystem mBrasSubsystem = new BrasSubsystem ();
     private final ColorSubsystem mColorSubsystem = new ColorSubsystem();
     private final PinceSubsystem mPinceSubsystem = new PinceSubsystem();
-    private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
-    private final BrasTestCommand mBrasTestCommand = new BrasTestCommand(mBrasSubsystem);
+    private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxControllerD);
+    private final BrasTestCommand mBrasTestCommand = new BrasTestCommand(mBrasSubsystem, mXboxControllerCP);
     private final TogglePinceCommand mTogglePinceCommand = new TogglePinceCommand(mPinceSubsystem);
 
     private final AutonomousCommandGroup mAutonomousCommandGroup = new AutonomousCommandGroup(mDriveSubsystem);
@@ -40,16 +41,15 @@ public class RobotContainer {
     }
 
     private void configureButtonBindings() {
-        JoystickButton buttonA = new JoystickButton(mXboxController, Button.kA.value);
-        buttonA.onTrue(mBrasTestCommand);
 
-        JoystickButton buttonB = new JoystickButton(mXboxController, Button.kB.value);
+        JoystickButton buttonB = new JoystickButton(mXboxControllerD, Button.kB.value);
         buttonB.onTrue(mTogglePinceCommand);
         
     }
 
     private void configureDefaultCommands() {
         mDriveSubsystem.setDefaultCommand(mDriveCommand);
+        mBrasSubsystem.setDefaultCommand(mBrasTestCommand);
     }
 
     public Command getAutonomousCommand() {
