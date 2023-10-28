@@ -27,6 +27,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
+    CommandScheduler.getInstance().stopAllMotors();
     m_sound.beep();
     m_sound.beep();
     m_sound.beep();
