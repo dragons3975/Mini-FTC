@@ -18,6 +18,10 @@ public class BrasSubsystem extends Subsystem {
     public void periodic() {
     }
 
+    public double getDegre() {
+        return m_moteurBras.getTachoCount();
+    }
+
     public void ferme() {
         m_moteurPince.set(-1);
     }
@@ -27,12 +31,12 @@ public class BrasSubsystem extends Subsystem {
     }
 
     public void monte() {
-        m_moteurBras.set(-0.1);
+        m_moteurBras.set(-0.2);
     }
 
     public void baisse() {
-        Telemetry.putData("oui", "oui");;
-        m_moteurBras.set(0.5);
+        
+        m_moteurBras.set(0.4);
     }
 
     public double getTacho() {

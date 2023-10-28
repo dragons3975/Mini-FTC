@@ -11,11 +11,13 @@ import lejos.hardware.port.MotorPort;
 import lejos.hardware.port.SensorPort;
 import lejos.robotics.SampleProvider;
 import dragons.ev3.ArduinoMotor;
+import ev3.robot.commands.BrasCommand;
 
 public class DriveSubsystem extends Subsystem {
 
     private final EV3LargeRegulatedMotor m_leftMotor = new EV3LargeRegulatedMotor(MotorPort.A);
     private final EV3LargeRegulatedMotor m_rightMotor = new EV3LargeRegulatedMotor(MotorPort.B);
+    private final BrasSubsystem mBrasSubsystem = new BrasSubsystem();
     private final ArduinoMotor m_moteurTest = new ArduinoMotor(0);
     private final ArduinoMotor m_moteurTest2 = new ArduinoMotor(1);
 
@@ -56,7 +58,9 @@ public class DriveSubsystem extends Subsystem {
             m_robotDrive.arcadeDrive(m_xSpeed, m_zRotation);
         }
 
-        Telemetry.putNumber("distance", getCentimetreParcourus());  
+        Telemetry.putNumber("distance", getCentimetreParcourus());
+
+        Telemetry.putNumber("Gros moteurs dist", mBrasSubsystem.getDegre());
     }
 
     public void resetGyro() {
@@ -68,14 +72,9 @@ public class DriveSubsystem extends Subsystem {
         return (m_degre - m_degreOffset) % 360;
     }
 
-    public void roule(boolean dir) {
-        if (dir) {
-            m_moteurTest.set(1);
-            m_moteurTest2.set(1);
-        } else {
-            m_moteurTest.set(-1);
-            m_moteurTest2.set(-1);
-        }
+    public void roule(double dir) {
+        m_moteurTest.set(dir);
+        m_moteurTest2.set(dir);
     }
 
     public boolean isAtSettPoint() {
@@ -103,6 +102,8 @@ public class DriveSubsystem extends Subsystem {
     }
 
     public void stop () {
+        m_moteurTest.set(0);
+        m_moteurTest.set(1);
         m_xSpeed = 0;
         m_zRotation = 0;
     }

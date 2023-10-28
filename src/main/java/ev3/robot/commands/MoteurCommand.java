@@ -24,9 +24,7 @@ public class MoteurCommand extends Command {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        if (mXboxController.) {
-            
-        }
+        mDriveSubsystem.roule(-mXboxController.getLeftY());
     }
 
     // Called once the command ends or is interrupted.

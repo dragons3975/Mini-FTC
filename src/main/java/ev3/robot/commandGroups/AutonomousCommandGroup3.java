@@ -13,13 +13,15 @@ public class AutonomousCommandGroup3 extends SequentialCommandGroup {
         //ParallelRaceGroup avancer5sec = new DriveAutoCommand(driveSubsystem, 1, 0).withTimeout(5);
         //ParallelRaceGroup tourner1sec = new DriveAutoCommand(driveSubsystem, 0, 1).withTimeout(1);
         //ParallelRaceGroup reculer5sec = new DriveAutoCommand(driveSubsystem, -1, 0).withTimeout(5);
-        //DriveAutoCommand avancerNbr = new DriveAutoCommand(driveSubsystem, 1, 0, 200);
+        DriveAutoCommand avancerNbr = new DriveAutoCommand(driveSubsystem, 1, 0, 10);
+        DriveAutoCommand avancerNbr2 = new DriveAutoCommand(driveSubsystem, 1, 0, 50);
         GyroCommand tourner90Degre = new GyroCommand(driveSubsystem, 90);
-        GyroCommand tournerMoins360Degre = new GyroCommand(driveSubsystem, -360);
+        GyroCommand tournerMoins360Degre = new GyroCommand(driveSubsystem, 15);
 
         addCommands(
+            avancerNbr,
             tournerMoins360Degre,
-            tourner90Degre
+            avancerNbr
             //avancer5sec,
             //tourner1sec,
             //reculer5sec
