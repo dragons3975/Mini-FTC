@@ -4,9 +4,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import ev3.robot.Constants.OIConstants;
 import ev3.robot.commandGroups.AutonomousCommandGroup;
 import ev3.robot.commandGroups.LeftCommandGroup;
+import ev3.robot.commands.AvionCommand;
 import ev3.robot.commands.BrasCommandBas;
 import ev3.robot.commands.BrasCommandHaut;
 import ev3.robot.commands.DriveCommand;
@@ -27,6 +29,7 @@ public class RobotContainer {
     private final BrasSubsystem mBrasSubsystem = new BrasSubsystem();
     private final ColorSubsystem mColorSubsystem = new ColorSubsystem();
     private final PinceSubsystem mPinceSubsystem = new PinceSubsystem();
+    private final AvionSubsystem mAvionSubsystem = new AvionSubsystem();
 
     private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
     private final BrasCommandHaut mBrasCommandHaut = new BrasCommandHaut(mBrasSubsystem);
@@ -35,8 +38,8 @@ public class RobotContainer {
     private final PinceCommandOuvre mPinceCommandOuvre = new PinceCommandOuvre(mPinceSubsystem);
     private final PinceCommandFerme mPinceCommandFerme = new PinceCommandFerme(mPinceSubsystem);
 
+    private final AvionCommand mAvionCommand = new AvionCommand(mAvionSubsystem);
 
-    
     private final LeftCommandGroup mLeftCommandGroup = new LeftCommandGroup(mDriveSubsystem);
     private final MiddleCommandGroup mMiddleCommandGroup = new MiddleCommandGroup();
     private final RightCommandGroup mRightCommandGroup = new RightCommandGroup();
@@ -63,6 +66,9 @@ public class RobotContainer {
 
         JoystickButton buttonB = new JoystickButton(mXboxController2, Button.kB.value);
         buttonB.whileTrue(mPinceCommandFerme);
+
+        JoystickButton StartButton = new JoystickButton(mXboxController2, Button.kStart.value);
+StartButton.whileTrue(mAvionCommand);
     }
 
     private void configureDefaultCommands() {

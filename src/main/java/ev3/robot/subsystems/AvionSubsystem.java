@@ -12,25 +12,25 @@ import lejos.hardware.port.MotorPort;
 public class AvionSubsystem extends Subsystem {
     
     private EV3MediumRegulatedMotor mAvion = new EV3MediumRegulatedMotor(MotorPort.C);
-   
+
     public AvionSubsystem() {
-    }
+}
 
     @Override
     public void periodic() {
-    }
+}
 
     public void set(double speed) {
-        mAvion.set(speed);
-    }
+    mAvion.set(speed);
+}
     
     public void stop() {
-        mAvion.set(0);
+    mAvion.set(0);
        
-    }
+}
 
     public void AvionLancement() {
-mAvion.set(0.5);
-    }
+    mAvion.set(0.5);
+}
 
 }

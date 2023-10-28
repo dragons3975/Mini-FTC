@@ -30,11 +30,11 @@ public class BrasSubsystem extends Subsystem {
     }
 
     public void MouvementBrasHaut() {
-        mMiddleMotor1.set(0.5);
+        mMiddleMotor1.set(0.3);
     }
 
     public void MouvementBrasBas() {
-        mMiddleMotor1.set(-0.5);
+        mMiddleMotor1.set(-0.3);
     }
 
 }

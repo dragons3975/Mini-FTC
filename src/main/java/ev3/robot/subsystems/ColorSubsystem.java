@@ -6,7 +6,7 @@ import lejos.hardware.port.SensorPort;
 
 public class ColorSubsystem extends Subsystem {
 
-    private final EV3ColorSensor mColor = new EV3ColorSensor(SensorPort.S2);
+    //private final EV3ColorSensor mColor = new EV3ColorSensor(SensorPort.S2);
    
     public ColorSubsystem() {
     }
@@ -15,8 +15,8 @@ public class ColorSubsystem extends Subsystem {
     public void periodic() {
     }
 
-    public int getColor() {
-        return mColor.getColorID();
-    }
+    //public int getColor() {
+      //  return mColor.getColorID();
+  //  }
 
 }

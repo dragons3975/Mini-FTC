@@ -12,7 +12,7 @@ import lejos.hardware.port.MotorPort;
 
 public class PinceSubsystem extends Subsystem {
 
-    private final EV3MediumRegulatedMotor mMiddleMotor2 = new EV3MediumRegulatedMotor(MotorPort.D);
+    //private final EV3MediumRegulatedMotor mMiddleMotor2 = new EV3MediumRegulatedMotor(MotorPort.D);
    
     public PinceSubsystem() {
     }
@@ -22,19 +22,19 @@ public class PinceSubsystem extends Subsystem {
     }
 
     public void set(double speed) {
-        mMiddleMotor2.set(speed);
+        //mMiddleMotor2.set(speed);
     }
     
     public void stop() {
-        mMiddleMotor2.set(0);
+        //mMiddleMotor2.set(0);
     }
 
     public void MouvementPinceOuvre() {
-        mMiddleMotor2.set(0.5);
+        //mMiddleMotor2.set(0.5);
     }
 
     public void MouvementPinceFerme() {
-        mMiddleMotor2.set(-0.5);
+        //mMiddleMotor2.set(-0.5);
     }
 
 }

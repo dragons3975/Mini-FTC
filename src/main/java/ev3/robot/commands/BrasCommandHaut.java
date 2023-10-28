@@ -15,12 +15,12 @@ public class BrasCommandHaut extends Command {
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
-        mBrasSubsystem.MouvementBrasHaut();
     }
 
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        mBrasSubsystem.MouvementBrasHaut();
     }
 
     // Called once the command ends or is interrupted.
