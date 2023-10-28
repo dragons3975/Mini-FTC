@@ -16,7 +16,7 @@ public class DriveSubsystem extends Subsystem {
     private final EV3LargeRegulatedMotor m_rearRightMotor = new EV3LargeRegulatedMotor(MotorPort.D);
     private final MecanumDrive m_robotDrive = new MecanumDrive(m_frontLeftMotor, m_frontRightMotor, m_rearLeftMotor, m_rearRightMotor);
     
-    private final EV3GyroSensor mGyro = new EV3GyroSensor(SensorPort.S3);
+    private final EV3GyroSensor mGyro = new EV3GyroSensor(SensorPort.S1);
     private final SampleProvider mProvider = mGyro.getAngleMode();
     private int mAngle = 0;
     private float [] mSample = new float[mProvider.sampleSize()];
