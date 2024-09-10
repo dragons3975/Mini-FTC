@@ -30,11 +30,11 @@ enum machineState {
 byte dataArray[SIZE];
 byte dataSize[SIZE] = {1, 1, 1, 1, 1, 4, 0, 0, 0, 1, 1, 1};
 
-byte motorPin[] = {5, 10};
+byte motorPin[] = {6, 5};
 byte motorSpeed[sizeof(motorPin)];
 Servo motor[sizeof(motorPin)];
 
-byte servoPin[] = {9, 11, 6};
+byte servoPin[] = {9, 10, 11};
 byte servoPosition[sizeof(servoPin)];
 Servo servo[sizeof(servoPin)];
 
@@ -43,7 +43,7 @@ byte encoderChannelAPin[] = {2, 3};
 //byte encoderChannelAPrevPrevState[sizeof(encoderChannelAPin)];
 //byte encoderChannelAPrevState[sizeof(encoderChannelAPin)];
 //byte encoderChannelACurrentState[sizeof(encoderChannelAPin)];
-byte encoderChannelBPin[] = {4, 7};
+byte encoderChannelBPin[] = {7, 4};
 long encoderValue[sizeof(encoderChannelAPin)];
 
 byte state = WAITING_HEADER;

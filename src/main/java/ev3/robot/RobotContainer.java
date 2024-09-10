@@ -13,7 +13,7 @@ public class RobotContainer {
     private final XboxController mXboxController = new XboxController(OIConstants.kDriverControllerPort);
 
     private final DriveSubsystem mDriveSubsystem = new DriveSubsystem();
-    private final BrasSubsystem mBrasSubsystem = new BrasSubsystem();
+    private final BrasSubsystem mBrasSubsystem = new BrasSubsystem(mXboxController);
     private final DriveCommand mDriveCommand = new DriveCommand(mDriveSubsystem, mXboxController);
 
     private final AutonomousCommandGroup mAutonomousCommandGroup;
