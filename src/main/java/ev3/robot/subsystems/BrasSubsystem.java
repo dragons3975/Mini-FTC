@@ -1,25 +1,40 @@
 package ev3.robot.subsystems;
 
+import dragons.ev3.ArduinoCRServo;
 import dragons.ev3.ArduinoMotor;
-import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.hal.DriverStationJNI;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class BrasSubsystem extends Subsystem {
 
     private final ArduinoMotor m_motorBras1 = new ArduinoMotor(0);
     private final ArduinoMotor m_motorBras2 = new ArduinoMotor(1);
-    private final XboxController mXboxController;
+    private final ArduinoCRServo m_motorBras3 = new ArduinoCRServo(2);
+    private final ArduinoCRServo m_motorBras4 = new ArduinoCRServo(3);
+    private final ArduinoCRServo m_motorBras5 = new ArduinoCRServo(4);
 
-    public BrasSubsystem(XboxController xboxController) {
-        mXboxController = xboxController;
+    double mSpeed = 0;
+
+    public BrasSubsystem() {
     }
 
     @Override
     public void periodic() {
-        m_motorBras1.set(mXboxController.getLeftX());
-        m_motorBras2.set(mXboxController.getLeftY());
-        System.out.println(m_motorBras1.getTachoCount());
-        System.out.println(m_motorBras1.getTachoCount());
+        m_motorBras1.set(mSpeed);
+        m_motorBras2.set(mSpeed);
+        m_motorBras3.set(mSpeed);
+        m_motorBras4.set(mSpeed);
+        m_motorBras5.set(mSpeed);
+        DriverStationJNI.Telemetry.putNumber("Moteur1", m_motorBras1.getTachoCount());
+        DriverStationJNI.Telemetry.putNumber("Moteur2", m_motorBras2.getTachoCount());
+    }
+
+    public void moveBras(double speed) {
+        mSpeed = speed;
+    }
+
+    public void stop(){
+        mSpeed = 0;
     }
 
 }

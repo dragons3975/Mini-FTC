@@ -19,21 +19,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.slf4j:slf4j-nop:2.0.9'
-	compileOnly 'org.projectlombok:lombok:1.18.30'
-	annotationProcessor 'org.projectlombok:lombok:1.18.30'
-    implementation 'net.java.dev.jna:jna-platform:5.13.0'
-    implementation("com.github.ev3dev-lang-java:lejos-commons:0.7.3")
-
     //Requis par wpi (geometry)
     implementation "com.fasterxml.jackson.core:jackson-annotations:2.15.2"
     implementation "com.fasterxml.jackson.core:jackson-core:2.15.2"
     implementation "com.fasterxml.jackson.core:jackson-databind:2.15.2"
-
-    //Serial
-    implementation "com.fazecast:jSerialComm:[2.0.0,3.0.0)"
     
-    implementation files('libs/DragonsWPILib-1.0.0-all.jar')
+    implementation files('libs/DragonsWPILib-1.0.0.jar')
 }
 
 compileJava.options.encoding = 'UTF-8'

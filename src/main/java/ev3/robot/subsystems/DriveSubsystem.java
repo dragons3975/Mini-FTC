@@ -1,6 +1,7 @@
 package ev3.robot.subsystems;
 
 import dragons.ev3.Ev3Motor;
+import edu.wpi.first.hal.DriverStationJNI.Telemetry;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 
@@ -26,6 +27,11 @@ public class DriveSubsystem extends Subsystem {
     public void periodic() {
         // On inverse volontairement x et y pour avoir le x vers l'avant
         m_robotDrive.driveCartesian(m_ySpeed, m_xSpeed, m_zRotation);
+        
+        Telemetry.putNumber("m_frontLeftMotor", m_frontLeftMotor.getTachoCount());
+        Telemetry.putNumber("m_rearLeftMotor", m_rearLeftMotor.getTachoCount());
+        Telemetry.putNumber("m_frontRightMotor", m_frontRightMotor.getTachoCount());
+        Telemetry.putNumber("m_rearRightMotor", m_rearRightMotor.getTachoCount());
     }
 
     public void mecanumDrive(double xSpeed, double ySpeed, double zRotation){
