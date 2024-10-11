@@ -14,8 +14,10 @@ enum keyWords {
   MOTOR_TACHO_2,
   MOTOR_TACHO_3,
   SERVO_PORT,
+  SERVO_MODE,
   SERVO_POSITION,
   SERVO_UPDATE,
+  BATTERY,
   SIZE
 };
 
@@ -28,13 +30,13 @@ enum machineState {
 };
 
 byte dataArray[SIZE];
-byte dataSize[SIZE] = {1, 1, 1, 1, 1, 4, 0, 0, 0, 1, 1, 1};
+byte dataSize[SIZE] = {1, 1, 1, 1, 1, 4, 0, 0, 0, 1, 1, 1, 1, 1};
 
-byte motorPin[] = {5, 10};
+byte motorPin[] = {6, 5};
 byte motorSpeed[sizeof(motorPin)];
 Servo motor[sizeof(motorPin)];
 
-byte servoPin[] = {9, 11, 6};
+byte servoPin[] = {9, 10, 11};
 byte servoPosition[sizeof(servoPin)];
 Servo servo[sizeof(servoPin)];
 
@@ -43,8 +45,10 @@ byte encoderChannelAPin[] = {2, 3};
 //byte encoderChannelAPrevPrevState[sizeof(encoderChannelAPin)];
 //byte encoderChannelAPrevState[sizeof(encoderChannelAPin)];
 //byte encoderChannelACurrentState[sizeof(encoderChannelAPin)];
-byte encoderChannelBPin[] = {4, 7};
+byte encoderChannelBPin[] = {7, 4};
 long encoderValue[sizeof(encoderChannelAPin)];
+
+byte batteryPin = A0;
 
 byte state = WAITING_HEADER;
 
@@ -128,9 +132,24 @@ void updateServos()
   if (dataArray[SERVO_UPDATE])
   {
     servoPosition[dataArray[SERVO_PORT]] = dataArray[SERVO_POSITION];
-    servo[dataArray[SERVO_PORT]].writeMicroseconds((int8_t)(servoPosition[dataArray[SERVO_PORT]]) * 10 + 1000); //scale up to 1000-2000
+
+    if(dataArray[SERVO_MODE] == 1)
+    {
+      // Mode continu
+      servo[dataArray[SERVO_PORT]].writeMicroseconds((int8_t)(servoPosition[dataArray[SERVO_PORT]]) * 5 + 1500); //scale up to 1000-2000
+    }
+    else
+    {
+      // Mode servo
+      servo[dataArray[SERVO_PORT]].writeMicroseconds((int8_t)(servoPosition[dataArray[SERVO_PORT]]) * 10 + 1000); //scale up to 1000-2000
+    }
     dataArray[SERVO_UPDATE] = 0;
   }
+}
+
+void updateBattery()
+{
+  dataArray[BATTERY] = ((analogRead(batteryPin))*1.0) / 1024 * 255;
 }
 
 void readChannelB(byte index)
@@ -242,5 +261,6 @@ void loop()
   //checkEncoders2And3(); // 0 et 1 sont sur interruptions
   updateMotors();
   updateServos();
+  updateBattery();
   
 }
