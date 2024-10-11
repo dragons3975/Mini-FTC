@@ -9,8 +9,6 @@ public class BrasSubsystem extends Subsystem {
 
     private final ArduinoMotor m_motorBras1 = new ArduinoMotor(0);
     private final ArduinoMotor m_motorBras2 = new ArduinoMotor(1);
-    private final ArduinoCRServo m_motorBras3 = new ArduinoCRServo(2);
-    private final ArduinoCRServo m_motorBras4 = new ArduinoCRServo(3);
     private final ArduinoCRServo m_motorBras5 = new ArduinoCRServo(4);
 
     double mSpeed = 0;
@@ -22,8 +20,6 @@ public class BrasSubsystem extends Subsystem {
     public void periodic() {
         m_motorBras1.set(mSpeed);
         m_motorBras2.set(mSpeed);
-        m_motorBras3.set(mSpeed);
-        m_motorBras4.set(mSpeed);
         m_motorBras5.set(mSpeed);
         DriverStationJNI.Telemetry.putNumber("Moteur1", m_motorBras1.getTachoCount());
         DriverStationJNI.Telemetry.putNumber("Moteur2", m_motorBras2.getTachoCount());

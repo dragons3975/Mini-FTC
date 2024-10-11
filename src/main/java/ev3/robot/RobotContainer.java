@@ -52,7 +52,6 @@ public class RobotContainer {
         buttonUp.whileTrue(mLiftBrasCommand);
         JoystickButton buttonDown = new JoystickButton(mXboxController, Button.kDown.value);
         buttonDown.whileTrue(mLowerBrasCommand);
-
     }
 
     private void configureDefaultCommands() {
