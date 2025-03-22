@@ -10,13 +10,7 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class PinceSubsystem extends Subsystem {
 
-    private final Ev3TouchSensor touch = new Ev3TouchSensor();
-    private final Ev3ColorSensor color = new Ev3ColorSensor();
-    private final Ev3UltrasonicSensor ultra = new Ev3UltrasonicSensor();
-    private final Ev3GyroSensor gyro = new Ev3GyroSensor();
-
-    private final ArduinoServo m_servo2 = new ArduinoServo(2) ;
-    private final ArduinoServo m_servo3 = new ArduinoServo(3) ;
+    private final ArduinoServo m_servo2 = new ArduinoServo(2);
   
     public PinceSubsystem() {
         openPince();
@@ -24,20 +18,14 @@ public class PinceSubsystem extends Subsystem {
 
     @Override
     public void periodic() {
-        DriverStationJNI.Telemetry.putBoolean("touch", touch.isPressed());
-        DriverStationJNI.Telemetry.putNumber("color", color.getColorID());
-        DriverStationJNI.Telemetry.putNumber("ultra", ultra.getDistance());
-        DriverStationJNI.Telemetry.putNumber("gyro", gyro.getAngle());
     }
 
     public void openPince() {
-        m_servo2.setAngle(0);
-        m_servo3.setAngle(180);
+        m_servo2.setAngle(90);
     }
 
     public void closePince() {
-        m_servo2.setAngle(90);
-        m_servo3.setAngle(90);
+        m_servo2.setAngle(0);
     }
 
 }

@@ -8,8 +8,6 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 public class BrasSubsystem extends Subsystem {
 
     private final ArduinoMotor m_motorBras1 = new ArduinoMotor(0);
-    private final ArduinoMotor m_motorBras2 = new ArduinoMotor(1);
-    private final ArduinoCRServo m_motorBras5 = new ArduinoCRServo(4);
 
     double mSpeed = 0;
 
@@ -18,11 +16,12 @@ public class BrasSubsystem extends Subsystem {
 
     @Override
     public void periodic() {
+        /*if (m_motorBras1.getTachoCount() > 150)
+        {
+            mSpeed = 0;
+        }*/
         m_motorBras1.set(mSpeed);
-        m_motorBras2.set(mSpeed);
-        m_motorBras5.set(mSpeed);
         DriverStationJNI.Telemetry.putNumber("Moteur1", m_motorBras1.getTachoCount());
-        DriverStationJNI.Telemetry.putNumber("Moteur2", m_motorBras2.getTachoCount());
     }
 
     public void moveBras(double speed) {

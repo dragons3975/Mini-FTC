@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 
 public class DriveSubsystem extends Subsystem {
 
-    private final Ev3Motor m_frontLeftMotor = new Ev3Motor(0);
-    private final Ev3Motor m_rearLeftMotor = new Ev3Motor(1);
-    private final Ev3Motor m_frontRightMotor = new Ev3Motor(2);
-    private final Ev3Motor m_rearRightMotor = new Ev3Motor(3);
+    private final Ev3Motor m_frontRightMotor = new Ev3Motor(0);
+    private final Ev3Motor m_rearRightMotor = new Ev3Motor(1);
+    private final Ev3Motor m_frontLeftMotor = new Ev3Motor(2);
+    private final Ev3Motor m_rearLeftMotor = new Ev3Motor(3);
     
     private final MecanumDrive m_robotDrive = new MecanumDrive(m_frontLeftMotor, m_frontRightMotor, m_rearLeftMotor, m_rearRightMotor);
 
@@ -19,8 +19,8 @@ public class DriveSubsystem extends Subsystem {
     private double m_ySpeed = 0;
 
     public DriveSubsystem() {
-        m_rearRightMotor.setInverted(true);
         m_frontRightMotor.setInverted(true);
+        m_rearLeftMotor.setInverted(true);
     }
 
     @Override
@@ -28,10 +28,10 @@ public class DriveSubsystem extends Subsystem {
         // On inverse volontairement x et y pour avoir le x vers l'avant
         m_robotDrive.driveCartesian(m_ySpeed, m_xSpeed, m_zRotation);
         
-        Telemetry.putNumber("m_frontLeftMotor", m_frontLeftMotor.getTachoCount());
+        /*Telemetry.putNumber("m_frontLeftMotor", m_frontLeftMotor.getTachoCount());
         Telemetry.putNumber("m_rearLeftMotor", m_rearLeftMotor.getTachoCount());
         Telemetry.putNumber("m_frontRightMotor", m_frontRightMotor.getTachoCount());
-        Telemetry.putNumber("m_rearRightMotor", m_rearRightMotor.getTachoCount());
+        Telemetry.putNumber("m_rearRightMotor", m_rearRightMotor.getTachoCount());*/
     }
 
     public void mecanumDrive(double xSpeed, double ySpeed, double zRotation){
