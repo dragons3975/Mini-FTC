@@ -47,4 +47,3 @@ shadowJar {
 }
 
 apply from: './config.gradle'
-apply from: './gradle/deploy.gradle'
