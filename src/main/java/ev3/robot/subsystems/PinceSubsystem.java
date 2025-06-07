@@ -11,9 +11,12 @@ import edu.wpi.first.wpilibj2.command.Subsystem;
 public class PinceSubsystem extends Subsystem {
 
     private final ArduinoServo m_servo2 = new ArduinoServo(2);
+
+    private boolean isClosed = true; 
   
     public PinceSubsystem() {
-        openPince();
+        closePince();
+        isClosed = true; 
     }
 
     @Override
@@ -22,10 +25,21 @@ public class PinceSubsystem extends Subsystem {
 
     public void openPince() {
         m_servo2.setAngle(90);
+        isClosed = false;
     }
 
     public void closePince() {
         m_servo2.setAngle(0);
+        isClosed = true;
     }
 
+    public void togglePince() {
+        if (isClosed) {
+            isClosed = false;
+            openPince(); 
+        } else {
+            isClosed = true;
+            closePince();
+        }
+    }
 }
